@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+	head
+		link(rel='stylesheet', href='/styles.css', type ='text/css')
+	body
+		div.bodydiv
+		div.bodyTextdiv
+			br
+			p= message
+			br 
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			form(class= 'register' name= 'post' action='/user/new' method='post')
+				label n a m e
+				input(type='text' name='name' autocomplete='off')
+				label a g e
+				input(type='age' name='age' autocomplete='off')
+				label e m a i l
+				input(type='text' name ='email' autocomplete='off')
+				label p a s s w o r d
+				input(type='password' name ='password' autocomplete='off')
+				label w h a t  i  w o u l d  t e l l  m y  y o u n g e r  s e l f
+				input(class= 'advice' type='text' name = 'advice' autocomplete='off')
+				br
+				br
+				br
+				br
+				input(type='submit' value='r e g i s t e r') 

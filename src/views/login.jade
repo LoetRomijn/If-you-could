@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+	head
+		link(rel='stylesheet', href='/styles.css', type ='text/css')
+	body
+		div.bodydiv
+		div.bodyTextdiv
+			br
+			p= message
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			form(class='login' name='post' action='/login' method='post')
+				label n a m e
+				input(type='text' name='name' autocomplete='off')
+				label p a s s w o r d
+				input(type='password' name ='password' autocomplete='off')
+				br
+				br
+				br
+				br
+				input(type='submit' value='l o g i n') 

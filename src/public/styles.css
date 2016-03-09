@@ -1,0 +1,208 @@
+/*CSS style for If you could - my final project for the NYCDA x BSSA*/
+
+* {
+	margin:0;
+	padding:0;
+}
+
+@font-face { 
+    font-family: 'TrajanusBricks'; 
+    src: url('TrajanusBricks.ttf'); 
+}
+
+@font-face{
+	font-family:'Carolus Italic';
+	src: url('carolusi.ttf');
+}
+
+/*body{
+	text-align: center;
+	background-image: url("palmleaves.jpeg");
+	margin: 0;
+	padding: 0;
+}
+*/
+
+p#headline {
+	text-align: center;
+	font-family: 'TrajanusBricks';
+	font-size: 30px;
+	font-style: none;
+}
+
+p#boxLink {
+	text-align: center;
+	margin-top: 20%;
+	font-family: 'TrajanusBricks';
+	font-size: 50px;
+}
+h2 {
+	text-align: center;
+	font-family: 'Carolus Italic';
+	font-size: 30px;
+}
+p {
+	text-align: center;
+	font-family: 'Carolus Italic';
+	font-size: 30px;		
+}
+
+li {							
+	display: inline-block;
+	list-style-type: none;
+	width: 80%;
+	/*border: 2px solid grey;*/
+	background-color: white;
+	text-align: center;
+	padding: 10px;
+	margin: 20px;
+	vertical-align: top;
+	font-family: 'TrajanusBricks';
+	font-size: 18px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	font-family: 'TrajanusBricks';
+	font-size:12px;
+	font-style: bold;
+}
+
+/*p#date {
+	font-size: 11px;
+	font-style: italic;
+}*/
+
+.bodydiv{
+	z-index: 1;
+	position: fixed;
+	background-color: white;
+	width: 80%;
+	height:100%;
+	left: 10%;
+	right: 10%;
+/*	margin:;*/
+	padding: 20px;
+	opacity: 0.7;
+	text-align: center;
+}
+
+.bodyTextdiv{
+	z-index: 2;
+	position:relative;
+	width: 80%;
+	height: 100%;
+	margin: auto;	
+	padding: 20px;
+	text-align: center;
+	overflow: auto;
+}
+
+.twoForms{
+	display: inline-block;
+	text-align: center;
+	margin: 100px;
+}
+
+/* not working boxes for the four choices yet */
+
+.boxes {
+	position: absolute;
+	text-align: center;
+	vertical-align: middle;
+	width: 50%;
+	height:50%;
+	border: 2px solid grey;
+}
+
+#box1 {
+	left: 0;
+	top: 0;
+}
+
+#box2{
+	right: 0;
+	top: 0;
+}
+
+#box3{
+	right: 0;
+	bottom: 0;
+}
+
+#box4{
+	left: 0;
+	bottom: 0;
+}
+
+.login {		
+	font-family: 'TrajanusBricks';			
+	text-align: center;
+	width: 80%;
+	margin: auto;
+}
+
+.register {		
+	font-family: 'TrajanusBricks';			
+	text-align: center;
+	width: 80%;
+	margin: auto;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: none;
+    border: none;
+    text-align: center;
+    box-shadow: 2px 2px 2px #303030;
+}
+
+input[type=age] {
+    width: 100%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: none;
+    border: none;
+    text-align: center;
+    box-shadow: 2px 2px 2px #303030;
+}
+
+input[type=password ] {
+    width: 100%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: none;
+    border: none;
+    text-align: center;
+    box-shadow: 2px 2px 2px #303030;
+}
+
+input.advice{
+	width: 100%;
+	height: 200px;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: none;
+    text-align: center;
+}
+
+
+input[type=submit] {   
+    background-color: white;
+    border: none;
+    width: 150px;
+    height: 50px;
+    color: black;
+    text-decoration: none;
+    margin: auto;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'TrajanusBricks';
+    box-shadow: 2px 2px 2px #303030;
+}
+
+
+

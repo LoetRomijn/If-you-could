@@ -19,10 +19,23 @@ var bodyParser = require('body-parser');
 var sequelize = require('sequelize');
 var session = require('express-session');
 var bcrypt = require('bcrypt');
+var sassMiddleware = require('node-sass-middleware');
+var path = require('path');
+var sendgrid = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 var app = express();
 
-app.use(express.static(__dirname + '/public'));
+  app.use(
+     sassMiddleware({
+         src: __dirname + '/sass', 
+         dest: __dirname + '/public',
+         debug: true,       
+     })
+  );   
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+// app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -201,6 +214,30 @@ app.post('/user/new', function(request, response) {
 		};
 	});
 });
+
+// Jons SAND email verification
+
+// function onUserCreated(confirmationToken) {
+// 			var link = 'http://' + req.headers.host + '/confirm_email/' + confirmationToken;
+
+// 			var payload = {
+// 				to: email,
+// 				from: 'sand@jonm.us',
+// 				subject: 'sand: account confirmation',
+// 				text: 'thank you for registering! the eternal desert awaits. ' +
+// 				'click the link to confirm your account.\n\n' +
+// 				link
+// 			};
+
+// 			sendgrid.send(payload, function (err) {
+// 				if (err) {
+// 					debug(err);
+// 					res.status('500').send();
+// 				} else {
+// 					res.send({text: 'email sent to: ' + email + '. check your email to confirm your account.'});
+// 				}
+// 			});
+// 		}
 
 // Edit
 

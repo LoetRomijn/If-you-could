@@ -1,0 +1,164 @@
+/*SCSS style for If you could - my final project for the NYCDA x BSSA*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'TrajanusBricks';
+  src: url('TrajanusBricks.ttf');
+}
+
+
+@font-face {
+  font-family: 'Carolus Italic';
+  src: url('carolusi.ttf');
+}
+
+$fontOne: 'TrajanusBricks';
+$fontTwo: 'Carolus Italic';
+
+p {
+  &#headline {
+    text-align: center;
+    font-family: $fontOne;
+    font-size: 30px;
+    font-style: none;
+  }
+  &#headline2 {
+    @extend #headline;
+    font-size: 20px;
+  }
+  &#boxLink {
+    @extend #headline;
+    margin-top: 20%;
+    font-size: 50px;
+  }
+}
+
+h2, p {
+  text-align: center;
+  font-family: $fontTwo;
+  font-size: 30px;
+}
+
+li {
+  display: inline-block;
+  list-style-type: none;
+  width: 80%;
+  background-color: white;
+  text-align: center;
+  padding: 10px;
+  margin: 20px;
+  vertical-align: top;
+  font-family: $fontOne;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-family: $fontOne;
+  font-size: 12px;
+  font-style: bold;
+}
+
+// .bodydiv {
+//   z-index: 1;
+//   position: fixed;
+//   background-color: green;
+//   width: 80%;
+//   height: 100%;
+//   left: 10%;
+//   right: 10%;
+//   padding: 20px;
+//   opacity: 0.7;
+//   text-align: center;
+// }
+
+.bodyTextdiv {
+  z-index: 2;
+  position: relative;
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  overflow: auto;
+}
+
+.twoForms {
+  display: inline-block;
+  text-align: center;
+  margin: 100px;
+}
+
+.boxes {
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+  width: 50%;
+  height: 50%;
+  border: 2px solid grey;
+}
+
+#box1 {
+  left: 0;
+  top: 0;
+}
+
+#box2 {
+  right: 0;
+  top: 0;
+}
+
+#box3 {
+  right: 0;
+  bottom: 0;
+}
+
+#box4 {
+  left: 0;
+  bottom: 0;
+}
+
+.login, .register {
+  font-family: $fontOne;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
+input {
+  &[type=text], &[type=age], &[type=password] {
+    width: 100%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: none;
+    border: none;
+    text-align: center;
+    box-shadow: 2px 2px 2px #303030;
+  }
+  &.advice {
+    width: 100%;
+    height: 200px;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: none;
+    text-align: center;
+  }
+  &[type=submit] {
+    background-color: white;
+    border: none;
+    width: 150px;
+    height: 50px;
+    color: black;
+    text-decoration: none;
+    margin: auto;
+    cursor: pointer;
+    text-align: center;
+    font-family: $fontOne;
+    box-shadow: 2px 2px 2px #303030;
+  }
+}

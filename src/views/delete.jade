@@ -1,0 +1,36 @@
+doctype html
+html(lang="en")
+	head
+		link(rel='stylesheet', href='/styles.css', type ='text/css')
+	body
+		div.bodydiv
+		div.bodyTextdiv
+			div(class='links') 
+				a(href='/') home
+				br
+				a(href='/user/choice') userpage
+				br
+				a(href='/logout') logout
+			div(class='back')
+				a(href='/user/profile') back	
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			p If you are sure you want to delete your account, press the confirm button below. 
+			br 
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			form(class= 'edit' name= 'post' action='/user/delete' method='post')
+				label d e l e t e ^ a c c o u n t
+				br
+				br
+				input(type='submit' value='c o n f i r m')

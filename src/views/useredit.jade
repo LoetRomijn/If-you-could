@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+	head
+		link(rel='stylesheet', href='/styles.css', type ='text/css')
+	body
+		div.bodydiv
+		div.bodyTextdiv
+			div(class='links') 
+				a(href='/') home
+				br
+				a(href='/user/choice') userpage
+				br
+				a(href='/logout') logout
+			div(class='back')
+				a(href='/user/profile') back				
+			br
+			p= message
+			br 
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			form(class= 'edit' name= 'post' action='/user/edit' method='post')
+				label n a m e
+				input(type='text' name='name' autocomplete='off' value='#{user.name}')
+				label a g e
+				input(type='age' name='age' autocomplete='off' value='#{user.age}')
+				label e m a i l
+				input(type='text' name ='email' autocomplete='off' value='#{user.email}')
+				label w h a t ^ i ^ w o u l d ^ t e l l ^ m y ^ y o u n g e r ^ s e l f
+				input(class= 'advice' type='text' name = 'advice' autocomplete='off' value='#{user.advice}')
+				br
+				br
+				br
+				br
+				input(type='submit' value='c o n f i r m')

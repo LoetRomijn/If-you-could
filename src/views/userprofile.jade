@@ -10,10 +10,40 @@ html(lang="en")
 	body
 		div.bodydiv
 		div.bodyTextdiv
+			div(class='links') 
+				a(href='/') home
+				br
+				a(href='/user/choice') userpage
+				br
+				a(href='/logout') logout
+			br
+			br
+			br
+			p#headline u^s^e^r ^ p^r^o^f^i^l^e
+			br
 			br
 			p= message
 			br
-			h1 User profile
-			br
 			br
 			p #{user.name}
+			br
+			br
+			br
+			br
+			p#headline2 w^h^a^t ^ i ^ w^o^u^l^d ^ t^e^l^l ^ m^y^s^e^l^f^:
+			br
+			p #{user.advice}
+			br
+			br
+			div.twoForms 
+				form(class='form' name='edit' action='/user/edit' method='get')
+					input(type='submit' value='e d i t ^ p r o f i l e')
+			div.twoForms
+				form(class='form' name='edit password' action='/user/editpassword' method='get')
+					input(type='submit' value='e d i t ^ p a s s w o r d')
+			div.twoForms
+				form(class='form' name='delete account' action='/user/delete' method='get')
+					input(type='submit' value='d e l e t e ^ a c c o u n t')
+			br
+			br
+			br

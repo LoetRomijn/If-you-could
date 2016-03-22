@@ -11,7 +11,7 @@
   font-family: 'Carolus Italic';
   src: url("carolusi.ttf"); }
 
-p#headline, p#headline2, p#boxLink {
+p#headline, p#headline2 {
   text-align: center;
   font-family: "TrajanusBricks";
   font-size: 30px;
@@ -19,10 +19,6 @@ p#headline, p#headline2, p#boxLink {
 
 p#headline2 {
   font-size: 20px; }
-
-p#boxLink {
-  margin-top: 20%;
-  font-size: 50px; }
 
 h2, p {
   text-align: center;
@@ -47,6 +43,8 @@ a {
   font-family: "TrajanusBricks";
   font-size: 12px;
   font-style: bold; }
+  a#boxLink {
+    font-size: 50px; }
 
 .bodyTextdiv {
   z-index: 2;
@@ -66,7 +64,6 @@ a {
 .boxes {
   position: absolute;
   text-align: center;
-  vertical-align: middle;
   width: 50%;
   height: 50%;
   border: 2px solid grey; }
@@ -87,7 +84,19 @@ a {
   left: 0;
   bottom: 0; }
 
-.login, .register {
+.links {
+  position: absolute;
+  text-align: right;
+  right: 5px;
+  top: 5px;
+  z-index: 6; }
+
+.back {
+  position: absolute;
+  left: 5px;
+  top: 5px; }
+
+.login, .register, .edit {
   font-family: "TrajanusBricks";
   text-align: center;
   width: 80%;
@@ -110,10 +119,13 @@ input.advice {
   box-sizing: none;
   text-align: center; }
 
+input[value] {
+  color: #C0C0C0; }
+
 input[type=submit] {
   background-color: white;
   border: none;
-  width: 150px;
+  width: 250px;
   height: 50px;
   color: black;
   text-decoration: none;

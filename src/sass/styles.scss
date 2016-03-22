@@ -30,11 +30,6 @@ p {
     @extend #headline;
     font-size: 20px;
   }
-  &#boxLink {
-    @extend #headline;
-    margin-top: 20%;
-    font-size: 50px;
-  }
 }
 
 h2, p {
@@ -62,7 +57,13 @@ a {
   font-family: $fontOne;
   font-size: 12px;
   font-style: bold;
+  &#boxLink {
+    @extend #headline;
+    font-size: 50px;
+  }
 }
+
+ 
 
 // .bodydiv {
 //   z-index: 1;
@@ -97,7 +98,6 @@ a {
 .boxes {
   position: absolute;
   text-align: center;
-  vertical-align: middle;
   width: 50%;
   height: 50%;
   border: 2px solid grey;
@@ -123,7 +123,21 @@ a {
   bottom: 0;
 }
 
-.login, .register {
+.links {
+  position: absolute;
+  text-align: right;
+  right: 5px;
+  top: 5px;
+  z-index: 6;
+}
+
+.back{
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.login, .register, .edit {
   font-family: $fontOne;
   text-align: center;
   width: 80%;
@@ -148,10 +162,13 @@ input {
     box-sizing: none;
     text-align: center;
   }
+  &[value]{
+    color: #C0C0C0;
+  }
   &[type=submit] {
     background-color: white;
     border: none;
-    width: 150px;
+    width: 250px;
     height: 50px;
     color: black;
     text-decoration: none;

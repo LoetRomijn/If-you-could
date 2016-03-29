@@ -2,6 +2,8 @@ doctype html
 html(lang="en")
 	head
 		link(rel='stylesheet', href='/styles.css', type = 'text/css')
+		// script(src='https://code.jquery.com/jquery-2.2.0.min.js')
+		// script(type='text/javascript' src="../random.js")
 	body
 		div.bodydiv
 		div.bodyTextdiv
@@ -20,15 +22,17 @@ html(lang="en")
 			br
 			br
 			br
-			p#headline hi
 			br
 			br
-			br
-			p= randomQuote
-			br
+			p #{latestID.advice}
 			br
 			br
+			p Age: #{latestID.age} 
+			//- p #{randomID.advice}
 			br
+			div.twoForms
+				form(class='form' name='random' id='random' action='/userpageAu' method='get')
+					input(type='submit' value='r a n d o m ^ a d v i c e')
 			br
 			br
 			br

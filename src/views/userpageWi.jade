@@ -20,16 +20,17 @@ html(lang="en")
 			br
 			br
 			br
-			p#headline hi
 			br
 			br
+			p #{latestID.advice}
 			br
 			br
+			p Age: #{latestID.age} 
+			//- p #{randomID.advice}
 			br
-			br
-			br
-			br
-			br
+			div.twoForms
+				form(class='form' name='random' id='random' action='/userpageAu' method='get')
+					input(type='submit' value='r a n d o m ^ a d v i c e')
 			br
 			br
 			br

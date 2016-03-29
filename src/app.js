@@ -8,12 +8,7 @@ to do:
 
 - check restful routes
 - email system - validation
-- edit and delete user / advice
-- semi random generator of advice
-- when registering error, how to just show the error without deleting 
-	all that has been typed..like when you already typed a long story in 
-	'advice' you don't want  to lose that
-- what if someone forgot their password?
+- lost password check errors
  
 /////////////////////////////////////////////////*/
 
@@ -53,6 +48,11 @@ app.use(session({
 
 app.set('views', './src/views');
 app.set('view engine', 'jade');
+
+// app.use('/userpageWi', function(request, response){
+// 	request.myThing{ }
+// })
+
 
 // Sequelize settings
 
@@ -133,61 +133,301 @@ app.get('/user/choice', function(request, response) {
 	response.render('userchoice')
 })
 
-// Themed user pages
+// Themed user pages incl latest advice + random function
 
 app.get('/userpageAu', function(request, response) {
 	var user = request.session.user;
-	var randomQuote = "";
+	var position = request.session.position;
+
+	console.log("position is")
+	console.log(request.session.position);
 
 	if (user === undefined) {
 		response.redirect('/?message=' + encodeURIComponent("please log in to view your user page."));
 	}
 
-	User.max('id').then(function(advice) {
-		randomQuote = User.advice;
-	}).then(function() {
-		response.render('userpageAu', {
-			user: user,
-			randomQuote: randomQuote
+	if (position === undefined) {
+		User.findAll().then(function(users) {
+			var allIDs = users.map(function(users) {
+				return {
+					id: users.dataValues.id,
+					age: users.dataValues.age,
+					advice: users.dataValues.advice
+				}
+			});
+			var latestID = allIDs[allIDs.length - 1];
+
+			request.session.position = latestID.id;
+
+			console.log("position is now:");
+			console.log(request.session.position);
+
+			response.render('userpageAu', {
+				user: user,
+				latestID: latestID,
+			});
 		});
-		// console.log(randomQuote)
-	});
+		return;
+	} else {
+		User.findAll().then(function(users) {
+			var allIDs = users.map(function(users) {
+				return {
+					id: users.dataValues.id,
+					age: users.dataValues.age,
+					advice: users.dataValues.advice
+				}
+			});
+
+			User.findOne({
+				where: {
+					id: position
+				}
+			}).then(function(user) {
+				latestID = user;
+
+				position = allIDs[Math.floor(Math.random() * allIDs.length)].id;
+
+				while (position === latestID.id) {
+					position = allIDs[Math.floor(Math.random() * allIDs.length)].id;
+				}
+
+				console.log("position changed to:");
+				console.log(request.session.position);
+
+				User.findOne({
+					where: {
+						id: position
+					}
+				}).then(function(user) {
+					latestID = user;
+					request.session.position = latestID.id;
+					response.render('userpageAu', {
+						user: user,
+						latestID: latestID,
+					});
+
+				})
+
+				return;
+
+			});
+		});
+	};
 });
+
+
 
 app.get('/userpageWi', function(request, response) {
 	var user = request.session.user;
+	var position = request.session.position;
 
 	if (user === undefined) {
 		response.redirect('/?message=' + encodeURIComponent("please log in to view your user page."));
-	} else {
-		response.render('userpageWi', {
-			user: user
-		})
 	}
+
+	if (position === undefined) {
+		User.findAll().then(function(users) {
+			var allIDs = users.map(function(users) {
+				return {
+					id: users.dataValues.id,
+					age: users.dataValues.age,
+					advice: users.dataValues.advice
+				}
+			});
+			var latestID = allIDs[allIDs.length - 1];
+
+			request.session.position = latestID.id;
+
+			response.render('userpageWi', {
+				user: user,
+				latestID: latestID,
+			});
+		});
+		return;
+	} else {
+		User.findAll().then(function(users) {
+			var allIDs = users.map(function(users) {
+				return {
+					id: users.dataValues.id,
+					age: users.dataValues.age,
+					advice: users.dataValues.advice
+				}
+			});
+
+			User.findOne({
+				where: {
+					id: position
+				}
+			}).then(function(user) {
+				latestID = user;
+
+				position = allIDs[Math.floor(Math.random() * allIDs.length)].id;
+
+				while (position === latestID.id) {
+					position = allIDs[Math.floor(Math.random() * allIDs.length)].id;
+				}
+
+				User.findOne({
+					where: {
+						id: position
+					}
+				}).then(function(user) {
+					latestID = user;
+					request.session.position = latestID.id;
+					response.render('userpageWi', {
+						user: user,
+						latestID: latestID,
+					});
+
+				})
+
+				return;
+
+			});
+		});
+	};
 });
 
 app.get('/userpageSp', function(request, response) {
 	var user = request.session.user;
+	var position = request.session.position;
 
 	if (user === undefined) {
 		response.redirect('/?message=' + encodeURIComponent("please log in to view your user page."));
-	} else {
-		response.render('userpageSp', {
-			user: user
-		})
 	}
+
+	if (position === undefined) {
+		User.findAll().then(function(users) {
+			var allIDs = users.map(function(users) {
+				return {
+					id: users.dataValues.id,
+					age: users.dataValues.age,
+					advice: users.dataValues.advice
+				}
+			});
+			var latestID = allIDs[allIDs.length - 1];
+
+			request.session.position = latestID.id;
+
+			response.render('userpageSp', {
+				user: user,
+				latestID: latestID,
+			});
+		});
+		return;
+	} else {
+		User.findAll().then(function(users) {
+			var allIDs = users.map(function(users) {
+				return {
+					id: users.dataValues.id,
+					age: users.dataValues.age,
+					advice: users.dataValues.advice
+				}
+			});
+
+			User.findOne({
+				where: {
+					id: position
+				}
+			}).then(function(user) {
+				latestID = user;
+
+				position = allIDs[Math.floor(Math.random() * allIDs.length)].id;
+
+				while (position === latestID.id) {
+					position = allIDs[Math.floor(Math.random() * allIDs.length)].id;
+				}
+
+				User.findOne({
+					where: {
+						id: position
+					}
+				}).then(function(user) {
+					latestID = user;
+					request.session.position = latestID.id;
+					response.render('userpageSp', {
+						user: user,
+						latestID: latestID,
+					});
+
+				})
+
+				return;
+
+			});
+		});
+	};
 });
 
 app.get('/userpageSu', function(request, response) {
 	var user = request.session.user;
+	var position = request.session.position;
 
 	if (user === undefined) {
 		response.redirect('/?message=' + encodeURIComponent("please log in to view your user page."));
-	} else {
-		response.render('userpageSu', {
-			user: user
-		})
 	}
+
+	if (position === undefined) {
+		User.findAll().then(function(users) {
+			var allIDs = users.map(function(users) {
+				return {
+					id: users.dataValues.id,
+					age: users.dataValues.age,
+					advice: users.dataValues.advice
+				}
+			});
+			var latestID = allIDs[allIDs.length - 1];
+
+			request.session.position = latestID.id;
+
+			response.render('userpageSu', {
+				user: user,
+				latestID: latestID,
+			});
+		});
+		return;
+	} else {
+		User.findAll().then(function(users) {
+			var allIDs = users.map(function(users) {
+				return {
+					id: users.dataValues.id,
+					age: users.dataValues.age,
+					advice: users.dataValues.advice
+				}
+			});
+
+			User.findOne({
+				where: {
+					id: position
+				}
+			}).then(function(user) {
+				latestID = user;
+
+				position = allIDs[Math.floor(Math.random() * allIDs.length)].id;
+
+				while (position === latestID.id) {
+					position = allIDs[Math.floor(Math.random() * allIDs.length)].id;
+				}
+
+				User.findOne({
+					where: {
+						id: position
+					}
+				}).then(function(user) {
+					latestID = user;
+					request.session.position = latestID.id;
+					response.render('userpageSu', {
+						user: user,
+						latestID: latestID,
+					});
+
+				})
+
+				return;
+
+			});
+		});
+	};
 });
 
 // User profile
@@ -232,8 +472,13 @@ app.post('/login', function(request, response) {
 						console.log("Error with bcrypt")
 					}
 					if (passwordMatch) {
-						request.session.user = user;
-						response.redirect('/user/choice');
+						if (user.advice === null) {
+							request.session.user = user;
+							response.redirect('/user/new/advice');
+						} else if (user.advice !== null) {
+							request.session.user = user;
+							response.redirect('/user/choice');
+						}
 					} else {
 						response.redirect('/login?message=' + encodeURIComponent("name or password incorrect, try again!"))
 					}
@@ -273,14 +518,21 @@ app.post('/user/new', function(request, response) {
 					to: request.body.email,
 					from: 'loetromijn@gmail.com',
 					subject: 'Registration: If you could',
-					text: 'Welcome, thank you for registering. Login to edit or add your own advice and view the latest or a random advice. If you have any questions, suggestions or anything else you would like to share with me, just click reply.'
+					text: 'Welcome,\n\n\n' +
+						'Thank you for registering.\n' +
+						'Login to edit or add your own advice and view the latest or a random advice.\n' +
+						'If you have any questions, suggestions or anything else you would like to share with me, just click reply.\n\n' +
+
+						'Your username = ' + request.body.name + '\n\n' +
+
+						'Your password = ' + request.body.password + '\n'
 				}
 				var user = request.session.user;
 				sendgrid.send(payload, function(err, user) {
 						if (err) {
 							return console.error(err);
 						} else {
-							response.redirect('/user/new/advice?message=' + encodeURIComponent("An email has been sent to you. Please login"));
+							response.redirect('/?message=' + encodeURIComponent("An email has been sent to you. Please login"));
 						}
 					}),
 					function(error) {
@@ -296,7 +548,7 @@ app.post('/user/new', function(request, response) {
 app.get('/user/new/advice', function(request, response) {
 	var user = request.session.user;
 	response.render('advice', {
-		user: user
+		user: request.session.user
 	})
 })
 
@@ -304,7 +556,7 @@ app.post('/user/new/advice', function(request, response) {
 	var user = request.session.user;
 
 	if (request.body.advice.length !== 0) {
-		User.create({
+		User.update({
 			advice: request.body.advice
 		}, {
 			where: {
@@ -317,7 +569,7 @@ app.post('/user/new/advice', function(request, response) {
 });
 
 
-// Edit user      - after editing, changes are confirmed but not yet showing on the profile page    
+// Edit user      - after editing, changes are confirmed but not yet immediately showing on the profile page    
 
 app.get('/user/edit', function(request, response) {
 	var user = request.session.user;
@@ -414,6 +666,94 @@ app.post('/user/editpassword', function(request, response) {
 	});
 });
 
+// Lost password, new password
+
+app.get('/user/lostpasswordmail', function(request, response) {
+	// var message = request.query.message;
+
+	response.render('userlostpasswordmail', {
+		message: request.query.message
+	});
+});
+
+app.post('/user/lostpasswordmail', function(request, response) {
+	var name = request.body.name;
+	var email = request.body.email;
+
+	User.findOne({
+		where: {
+			name: name,
+			email: email
+		}
+	}).then(function(user) {
+		if (user === null || request.body.email.length === 0 || request.body.name.length === 0) {
+			response.redirect('/user/lostpasswordmail/?message=' + encodeURIComponent("Name or email invalid, try again."));
+		}
+		var link = 'http://' + request.headers.host + '/user/lostpassword/';
+		var payload = {
+			to: email,
+			from: 'loetromijn@gmail.com',
+			subject: 'Registration: If you could',
+			text: 'Hi,\n\n\n' +
+				'Seems like you lost your password. Click the link below.\n' +
+				link
+		}
+
+		sendgrid.send(payload, function(err) {
+			if (err) {
+				return console.error(err);
+			} else {
+				response.redirect('/?message=' + encodeURIComponent("An email has been sent to you. Please click the link in the email"));
+			}
+		});
+	});
+});
+
+
+app.get('/user/lostpassword', function(request, response) {
+	response.render('userlostpassword', {
+		message: request.query.message
+	});
+});
+
+app.post('/user/lostpassword', function(request, response) {
+	var name = request.body.name;
+	var email = request.body.email;
+
+	if(request.body.name.length === 0 || request.body.email.length === 0){
+		response.redirect('/user/lostpassword/?message=' + encodeURIComponent("Please enter a name or email."));
+		}
+
+	User.findOne({
+		where: {
+			name: name,
+			email: email
+		}
+	}).then(function(user) {
+		if (user === null) {
+			response.redirect('/user/lostpassword/?message=' + encodeURIComponent("Name or email invalid, try again."));
+		}
+		if (request.body.password.length === 0 || request.body.password === "new password") {
+			response.redirect('/user/lostpassword/?message=' + encodeURIComponent("Please enter a password"));
+		}
+		bcrypt.hash(request.body.password, 8, function(err, passwordHash) {
+			if (err !== undefined) {
+				console.log(err);
+			}
+			User.update({
+				password: passwordHash,
+			}, {
+				where: {
+					name: request.body.name,
+					email: request.body.email
+				}
+			});
+		});
+		response.redirect('/?message=' + encodeURIComponent("Login with your new password"));
+	});
+});
+
+
 // Delete user
 
 app.get('/user/delete', function(request, response) {
@@ -444,3 +784,6 @@ sequelize.sync().then(function() {
 		console.log('Ifyoucould final project running on port 3000');
 	});
 });
+
+
+// function

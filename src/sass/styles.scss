@@ -5,6 +5,8 @@
   padding: 0;
 }
 
+// Fonts, headlines, paragraph sizes etc.
+
 @font-face {
   font-family: 'TrajanusBricks';
   src: url('TrajanusBricks.ttf');
@@ -28,6 +30,10 @@ p {
   }
   &#headline2 {
     @extend #headline;
+    font-size: 20px;
+  }
+  &#small{
+    font-family: $fontTwo;
     font-size: 20px;
   }
 }
@@ -63,20 +69,8 @@ a {
   }
 }
 
- 
 
-// .bodydiv {
-//   z-index: 1;
-//   position: fixed;
-//   background-color: green;
-//   width: 80%;
-//   height: 100%;
-//   left: 10%;
-//   right: 10%;
-//   padding: 20px;
-//   opacity: 0.7;
-//   text-align: center;
-// }
+// Wrappers, forms and boxes: positions
 
 .bodyTextdiv {
   z-index: 2;
@@ -87,6 +81,7 @@ a {
   padding: 20px;
   text-align: center;
   overflow: auto;
+  animation:pretty-fade 2s infinite ease-in-out alternate;
 }
 
 .twoForms {
@@ -137,6 +132,8 @@ a {
   top: 5px;
 }
 
+// Forms fonts and sizes and some styling
+
 .login, .register, .edit {
   font-family: $fontOne;
   text-align: center;
@@ -150,6 +147,8 @@ input {
     padding: 5px 5px;
     margin: 8px 0;
     box-sizing: none;
+    font-family: $fontTwo;
+    font-size: 20px;
     border: none;
     text-align: center;
     box-shadow: 2px 2px 2px #303030;
@@ -163,7 +162,7 @@ input {
     text-align: center;
   }
   &[value]{
-    color: #C0C0C0;
+    color: #534646;
   }
   &[type=submit] {
     background-color: white;
@@ -179,3 +178,18 @@ input {
     box-shadow: 2px 2px 2px #303030;
   }
 }
+
+// Test SCSS
+
+@keyframes pretty-fade{
+  0%{
+     -webkit-filter:brightness(1) contrast(1) saturate(1);
+  };
+  100%{
+     -webkit-filter:brightness(1) contrast(0.8) saturate(0.5); 
+  };
+}
+
+// .fade{
+//   animation:pretty-fade 2s infinite ease-in-out alternate;
+// }

@@ -20,6 +20,10 @@ p#headline, p#headline2 {
 p#headline2 {
   font-size: 20px; }
 
+p#small {
+  font-family: "Carolus Italic";
+  font-size: 20px; }
+
 h2, p {
   text-align: center;
   font-family: "Carolus Italic";
@@ -54,7 +58,8 @@ a {
   margin: auto;
   padding: 20px;
   text-align: center;
-  overflow: auto; }
+  overflow: auto;
+  animation: pretty-fade 2s infinite ease-in-out alternate; }
 
 .twoForms {
   display: inline-block;
@@ -107,6 +112,8 @@ input[type=text], input[type=age], input[type=password] {
   padding: 5px 5px;
   margin: 8px 0;
   box-sizing: none;
+  font-family: "Carolus Italic";
+  font-size: 20px;
   border: none;
   text-align: center;
   box-shadow: 2px 2px 2px #303030; }
@@ -120,7 +127,7 @@ input.advice {
   text-align: center; }
 
 input[value] {
-  color: #C0C0C0; }
+  color: #534646; }
 
 input[type=submit] {
   background-color: white;
@@ -134,3 +141,9 @@ input[type=submit] {
   text-align: center;
   font-family: "TrajanusBricks";
   box-shadow: 2px 2px 2px #303030; }
+
+@keyframes pretty-fade {
+  0% {
+    -webkit-filter: brightness(1) contrast(1) saturate(1); }
+  100% {
+    -webkit-filter: brightness(1) contrast(0.8) saturate(0.5); } }

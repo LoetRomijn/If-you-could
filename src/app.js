@@ -4,11 +4,11 @@ Final Project for NYCDA x BSSA course jan-march 2016
 
 If you could 
 
-to do:
+to improve:
 
-- check restful routes
-- email system - validation
-- lost password check errors
+- validation by email
+- postgres order of entries, check sort by timestamps
+- clean up code by writing 'find random advice' query into a function
  
 /////////////////////////////////////////////////*/
 
@@ -34,8 +34,6 @@ app.use(
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(express.static(__dirname + '/public'));
-
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
@@ -48,10 +46,6 @@ app.use(session({
 
 app.set('views', './src/views');
 app.set('view engine', 'jade');
-
-// app.use('/userpageWi', function(request, response){
-// 	request.myThing{ }
-// })
 
 
 // Sequelize settings
@@ -83,6 +77,7 @@ var User = sequelize.define('users', {
 		allowNull: false
 	},
 	advice: Sequelize.TEXT
+	// timeStamp: Sequelize.DATE
 });
 
 
@@ -139,9 +134,6 @@ app.get('/userpageAu', function(request, response) {
 	var user = request.session.user;
 	var position = request.session.position;
 
-	console.log("position is")
-	console.log(request.session.position);
-
 	if (user === undefined) {
 		response.redirect('/?message=' + encodeURIComponent("please log in to view your user page."));
 	}
@@ -155,12 +147,10 @@ app.get('/userpageAu', function(request, response) {
 					advice: users.dataValues.advice
 				}
 			});
+
 			var latestID = allIDs[allIDs.length - 1];
 
 			request.session.position = latestID.id;
-
-			console.log("position is now:");
-			console.log(request.session.position);
 
 			response.render('userpageAu', {
 				user: user,
@@ -191,9 +181,6 @@ app.get('/userpageAu', function(request, response) {
 					position = allIDs[Math.floor(Math.random() * allIDs.length)].id;
 				}
 
-				console.log("position changed to:");
-				console.log(request.session.position);
-
 				User.findOne({
 					where: {
 						id: position
@@ -201,6 +188,7 @@ app.get('/userpageAu', function(request, response) {
 				}).then(function(user) {
 					latestID = user;
 					request.session.position = latestID.id;
+
 					response.render('userpageAu', {
 						user: user,
 						latestID: latestID,
@@ -501,10 +489,10 @@ app.post('/user/new', function(request, response) {
 		if (err !== undefined) {
 			console.log(err);
 		}
+
 		if (request.body.name.length === 0 || request.body.email.length === 0 || request.body.password.length === 0) {
 			response.redirect('/user/new?message=' + encodeURIComponent("please enter a name, emailaddress and a password"));
-		}
-		if (request.body.age < 12 || request.body.age > 110) {
+		} else if (request.body.age < 12 || request.body.age > 110) {
 			response.redirect('/user/new?message=' + encodeURIComponent("I'm sorry, you must be 12 or older to enter this website"));
 		} else {
 			User.create({
@@ -688,8 +676,9 @@ app.post('/user/lostpasswordmail', function(request, response) {
 	}).then(function(user) {
 		if (user === null || request.body.email.length === 0 || request.body.name.length === 0) {
 			response.redirect('/user/lostpasswordmail/?message=' + encodeURIComponent("Name or email invalid, try again."));
+			return;
 		}
-		var link = 'http://' + request.headers.host + '/user/lostpassword/';
+		var link = 'http://' + request.headers.host + '/user/lostpassword/' + user.id;
 		var payload = {
 			to: email,
 			from: 'loetromijn@gmail.com',
@@ -710,32 +699,21 @@ app.post('/user/lostpasswordmail', function(request, response) {
 });
 
 
-app.get('/user/lostpassword', function(request, response) {
+app.get('/user/lostpassword/:id', function(request, response) {
 	response.render('userlostpassword', {
-		message: request.query.message
+		message: request.query.message,
+		id: request.params.id
 	});
 });
 
-app.post('/user/lostpassword', function(request, response) {
-	var name = request.body.name;
-	var email = request.body.email;
+app.post('/user/lostpassword/:id', function(request, response) {
 
-	if(request.body.name.length === 0 || request.body.email.length === 0){
-		response.redirect('/user/lostpassword/?message=' + encodeURIComponent("Please enter a name or email."));
-		}
 
-	User.findOne({
-		where: {
-			name: name,
-			email: email
-		}
-	}).then(function(user) {
-		if (user === null) {
-			response.redirect('/user/lostpassword/?message=' + encodeURIComponent("Name or email invalid, try again."));
-		}
-		if (request.body.password.length === 0 || request.body.password === "new password") {
-			response.redirect('/user/lostpassword/?message=' + encodeURIComponent("Please enter a password"));
-		}
+	if (request.params.id === undefined) {
+		response.redirect('/user/lostpasswordmail/?message=' + encodeURIComponent("Oops, something went wrong..try again."));
+	} else if (request.body.password.length === 0 || request.body.password === "new password") {
+		response.redirect('/user/lostpassword/' + request.params.id + '/?message=' + encodeURIComponent("Please enter a password"));
+	} else {
 		bcrypt.hash(request.body.password, 8, function(err, passwordHash) {
 			if (err !== undefined) {
 				console.log(err);
@@ -744,13 +722,12 @@ app.post('/user/lostpassword', function(request, response) {
 				password: passwordHash,
 			}, {
 				where: {
-					name: request.body.name,
-					email: request.body.email
+					id: request.params.id
 				}
 			});
 		});
 		response.redirect('/?message=' + encodeURIComponent("Login with your new password"));
-	});
+	}
 });
 
 
@@ -785,5 +762,3 @@ sequelize.sync().then(function() {
 	});
 });
 
-
-// function

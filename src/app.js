@@ -8,6 +8,7 @@ to improve:
 
 - validation by email
 - postgres order of entries, check sort by timestamps
+- password change id to something not that easy to 'hack'
 - clean up code by writing 'find random advice' query into a function
  
 /////////////////////////////////////////////////*/
@@ -90,6 +91,12 @@ app.get('/', function(request, response) {
 		message: request.query.message,
 		user: request.session.user
 	});
+});
+
+// Why
+
+app.get('/why', function(request, response){
+	response.render('why');
 });
 
 // Login 
@@ -635,7 +642,7 @@ app.post('/user/editpassword', function(request, response) {
 		response.redirect('/?message=' + encodeURIComponent("please log in to view your profile."));
 	}
 
-	if (request.body.password.length !== 0) {
+	if (request.body.password.length !== 0 && request.body.password !== "new password") {
 		bcrypt.hash(request.body.password, 8, function(err, passwordHash) {
 			if (err !== undefined) {
 				console.log(err);

@@ -6,8 +6,6 @@ html(lang='en')
 		link(rel='stylesheet', href='/styles.css', type ='text/css')
 		script(src="https://code.jquery.com/jquery-2.2.2.js"   integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="   crossorigin="anonymous")
 		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous")
-		// script(src="bootstrap.js")
-		// script(src="bootstrap.min.js")
 	body
 		div.bodydiv
 		div.bodyTextdiv
@@ -30,10 +28,16 @@ html(lang='en')
 			p= message
 			br
 			br
-			div.twoForms 
-				form(class='form' name='post' action='/login' method='get')
-					input(type='submit' value='l o g i n')
-			div.twoForms
-				form(class= 'form' name= 'post' action='/user/new' method='get')
-					input(type='submit' value='r e g i s t e r')
+			div#index
+				div.twoForms 
+					form(class='form' name='post' action='/login' method='get')
+						input(type='submit' value='l o g i n')
+				div.twoForms
+					form(class= 'form' name= 'post' action='/user/new' method='get')
+						input(type='submit' value='r e g i s t e r')
+		div.why
+			a(href='/why') why
+				//- div.something
+		//- 	video(width='100%', autoplay='', loop='')
+		//- 		source(src='two-bearded-men-man-and-mountain-scenics-16414-filmsupply.mov', type='video/mp4')
 

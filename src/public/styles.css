@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*SCSS style for If you could - my final project for the NYCDA x BSSA*/
 * {
   margin: 0;
@@ -5,11 +6,17 @@
 
 @font-face {
   font-family: 'TrajanusBricks';
-  src: url("TrajanusBricks.ttf"); }
+  src: url("/fonts/TrajanusBricks.ttf"); }
 
 @font-face {
   font-family: 'Carolus Italic';
-  src: url("carolusi.ttf"); }
+  src: url("/fonts/carolusi.ttf"); }
+
+@font-face {
+  font-family: 'raleway-regular';
+  src: url("/fonts/raleway-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
 
 p#headline, p#headline2 {
   text-align: center;
@@ -21,13 +28,18 @@ p#headline2 {
   font-size: 20px; }
 
 p#small {
-  font-family: "Carolus Italic";
+  font-family: "raleway-regular";
   font-size: 20px; }
+
+p#why {
+  font-family: "raleway-regular";
+  font-size: 18px; }
 
 h2, p {
   text-align: center;
-  font-family: "Carolus Italic";
-  font-size: 30px; }
+  font-family: "raleway-regular";
+  font-size: 30px;
+  color: black; }
 
 li {
   display: inline-block;
@@ -48,7 +60,10 @@ a {
   font-size: 12px;
   font-style: bold; }
   a#boxLink {
-    font-size: 50px; }
+    font-size: 50px;
+    text-shadow: 2px 1px 2px #303030; }
+  a.white {
+    color: white; }
 
 .bodyTextdiv {
   z-index: 2;
@@ -58,7 +73,9 @@ a {
   margin: auto;
   padding: 20px;
   text-align: center;
-  overflow: auto;
+  overflow: auto; }
+
+#index {
   animation: pretty-fade 2s infinite ease-in-out alternate; }
 
 .twoForms {
@@ -70,24 +87,28 @@ a {
   position: absolute;
   text-align: center;
   width: 50%;
-  height: 50%;
-  border: 2px solid grey; }
+  height: 50%; }
 
 #box1 {
   left: 0;
-  top: 0; }
+  top: 0;
+  background-image: url("photoSérgioRola.jpg");
+  vertical-align: middle; }
 
 #box2 {
   right: 0;
-  top: 0; }
+  top: 0;
+  background-image: url("photoEdewaaFoster.jpg"); }
 
 #box3 {
   right: 0;
-  bottom: 0; }
+  bottom: 0;
+  background-image: url("photoBrandonMorgan.jpg"); }
 
 #box4 {
   left: 0;
-  bottom: 0; }
+  bottom: 0;
+  background-image: url("photoLoretaPavoliene.jpg"); }
 
 .links {
   position: absolute;
@@ -107,12 +128,18 @@ a {
   width: 80%;
   margin: auto; }
 
+label {
+  font-family: "TrajanusBricks";
+  font-style: none;
+  font-weight: normal;
+  font-size: 20px; }
+
 input[type=text], input[type=age], input[type=password] {
   width: 100%;
   padding: 5px 5px;
   margin: 8px 0;
   box-sizing: none;
-  font-family: "Carolus Italic";
+  font-family: "raleway-regular";
   font-size: 20px;
   border: none;
   text-align: center;
@@ -147,3 +174,38 @@ input[type=submit] {
     -webkit-filter: brightness(1) contrast(1) saturate(1); }
   100% {
     -webkit-filter: brightness(1) contrast(0.8) saturate(0.5); } }
+
+@keyframes initial-fade {
+  0% {
+    -webkit-filter: brightness(1) contrast(1) saturate(1); }
+  100% {
+    -webkit-filter: brightness(0) contrast(0) saturate(0.5); } }
+
+.something {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: initial-fade 10s fade-out; }
+
+.successfully-saved.hide-opacity {
+  opacity: 0; }
+
+.successfully-saved {
+  color: #FFFFFF;
+  text-align: center;
+  -webkit-transition: opacity 3s ease-in-out;
+  -moz-transition: opacity 3s ease-in-out;
+  -ms-transition: opacity 3s ease-in-out;
+  -o-transition: opacity 3s ease-in-out;
+  opacity: 1; }
+
+.why {
+  position: absolute;
+  bottom: 10px;
+  left: 10px; }
+
+.why a {
+  font: "TrajanusBricks"; }

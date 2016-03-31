@@ -5,21 +5,31 @@
   padding: 0;
 }
 
+
 // Fonts, headlines, paragraph sizes etc.
 
 @font-face {
   font-family: 'TrajanusBricks';
-  src: url('TrajanusBricks.ttf');
+  src: url('/fonts/TrajanusBricks.ttf');
 }
 
 
 @font-face {
   font-family: 'Carolus Italic';
-  src: url('carolusi.ttf');
+  src: url('/fonts/carolusi.ttf');
+}
+
+@font-face {
+    font-family: 'raleway-regular';
+    src: url('/fonts/raleway-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 $fontOne: 'TrajanusBricks';
 $fontTwo: 'Carolus Italic';
+$fontThree:'raleway-regular';
+
 
 p {
   &#headline {
@@ -33,15 +43,20 @@ p {
     font-size: 20px;
   }
   &#small{
-    font-family: $fontTwo;
+    font-family: $fontThree;
     font-size: 20px;
+  }
+  &#why{
+    font-family: $fontThree;
+    font-size: 18px;
   }
 }
 
 h2, p {
   text-align: center;
-  font-family: $fontTwo;
+  font-family: $fontThree;
   font-size: 30px;
+  color:black;
 }
 
 li {
@@ -66,11 +81,21 @@ a {
   &#boxLink {
     @extend #headline;
     font-size: 50px;
+    text-shadow: 2px 1px 2px #303030;
+  }
+  &.white{
+    color: white;
   }
 }
 
 
 // Wrappers, forms and boxes: positions
+
+// .bodydiv{
+//     width: 100%;
+//     height: 100%;
+//     background-color:radial-gradient(#fff, #ccc);
+// }
 
 .bodyTextdiv {
   z-index: 2;
@@ -81,6 +106,9 @@ a {
   padding: 20px;
   text-align: center;
   overflow: auto;
+}
+
+#index{
   animation:pretty-fade 2s infinite ease-in-out alternate;
 }
 
@@ -95,27 +123,31 @@ a {
   text-align: center;
   width: 50%;
   height: 50%;
-  border: 2px solid grey;
 }
 
 #box1 {
   left: 0;
   top: 0;
+  background-image: url('photoSérgioRola.jpg');
+  vertical-align: middle;
 }
 
 #box2 {
   right: 0;
   top: 0;
+  background-image: url('photoEdewaaFoster.jpg');
 }
 
 #box3 {
   right: 0;
   bottom: 0;
+  background-image: url('photoBrandonMorgan.jpg'); 
 }
 
 #box4 {
   left: 0;
   bottom: 0;
+  background-image: url('photoLoretaPavoliene.jpg');
 }
 
 .links {
@@ -141,13 +173,20 @@ a {
   margin: auto;
 }
 
+label {
+  font-family: $fontOne;
+  font-style: none;
+  font-weight: normal;
+  font-size: 20px;
+}
+
 input {
   &[type=text], &[type=age], &[type=password] {
     width: 100%;
     padding: 5px 5px;
     margin: 8px 0;
     box-sizing: none;
-    font-family: $fontTwo;
+    font-family: $fontThree;
     font-size: 20px;
     border: none;
     text-align: center;
@@ -190,6 +229,46 @@ input {
   };
 }
 
-// .fade{
-//   animation:pretty-fade 2s infinite ease-in-out alternate;
-// }
+@keyframes initial-fade{
+  0%{
+    -webkit-filter:brightness(1) contrast(1) saturate(1);
+  }
+  100%{
+    -webkit-filter:brightness(0) contrast(0) saturate(0.5);
+  }
+}
+
+.something{
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation:initial-fade 10s fade-out;
+}
+
+.successfully-saved.hide-opacity{
+    opacity: 0;
+}
+
+.successfully-saved {
+    color: #FFFFFF;
+    text-align: center;
+
+    -webkit-transition: opacity 3s ease-in-out;
+    -moz-transition: opacity 3s ease-in-out;
+    -ms-transition: opacity 3s ease-in-out;
+    -o-transition: opacity 3s ease-in-out;
+     opacity: 1;
+}
+
+.why{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.why a{
+  font: $fontOne;   
+}

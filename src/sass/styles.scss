@@ -1,4 +1,5 @@
 /*SCSS style for If you could - my final project for the NYCDA x BSSA*/
+// Background photos via Unsplash.com --> check it out for awesome free stockphotos!
 
 * {
   margin: 0;
@@ -89,16 +90,18 @@ a {
 }
 
 
-// Wrappers, forms and boxes: positions
+// Wrappers, forms and boxes: positions etc.
 
-// .bodydiv{
-//     width: 100%;
-//     height: 100%;
-//     background-color:radial-gradient(#fff, #ccc);
-// }
+body {
+  background-image: url('photoPaulSummers.jpg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  z-index: 0;
+  overflow: hidden;
+}
 
 .bodyTextdiv {
-  z-index: 2;
+  z-index: 5;
   position: relative;
   width: 80%;
   height: 100%;
@@ -106,10 +109,14 @@ a {
   padding: 20px;
   text-align: center;
   overflow: auto;
+  &#why{
+    background-color: white;
+    opacity: 0.8;
+  }
 }
 
 #index{
-  animation:pretty-fade 2s infinite ease-in-out alternate;
+  animation:initial-fade 2s infinite ease-in-out alternate;
 }
 
 .twoForms {
@@ -218,51 +225,6 @@ input {
   }
 }
 
-// Test SCSS
-
-@keyframes pretty-fade{
-  0%{
-     -webkit-filter:brightness(1) contrast(1) saturate(1);
-  };
-  100%{
-     -webkit-filter:brightness(1) contrast(0.8) saturate(0.5); 
-  };
-}
-
-@keyframes initial-fade{
-  0%{
-    -webkit-filter:brightness(1) contrast(1) saturate(1);
-  }
-  100%{
-    -webkit-filter:brightness(0) contrast(0) saturate(0.5);
-  }
-}
-
-.something{
-  z-index: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  animation:initial-fade 10s fade-out;
-}
-
-.successfully-saved.hide-opacity{
-    opacity: 0;
-}
-
-.successfully-saved {
-    color: #FFFFFF;
-    text-align: center;
-
-    -webkit-transition: opacity 3s ease-in-out;
-    -moz-transition: opacity 3s ease-in-out;
-    -ms-transition: opacity 3s ease-in-out;
-    -o-transition: opacity 3s ease-in-out;
-     opacity: 1;
-}
-
 .why{
   position: absolute;
   bottom: 10px;
@@ -270,5 +232,19 @@ input {
 }
 
 .why a{
-  font: $fontOne;   
+  font: $fontOne;
+  font-size: 25px;   
+  color: white;
+  text-shadow: 2px 2px 2px #303030;
+}
+
+// Index buttons
+
+@keyframes initial-fade{
+  0%{
+    -webkit-filter: opacity(1);
+  }
+  100%{
+    -webkit-filter: opacity(0.4);
+  }
 }

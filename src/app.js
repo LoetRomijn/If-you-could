@@ -10,6 +10,7 @@ to improve:
 - postgres order of entries, check sort by timestamps
 - password change id to something not that easy to 'hack'
 - clean up code by writing 'find random advice' query into a function
+- add season-choice to advice ?
  
 /////////////////////////////////////////////////*/
 

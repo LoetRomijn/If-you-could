@@ -54,7 +54,8 @@ app.set('view engine', 'jade');
 
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('ifyoucould', process.env.POSTGRES_USER, null, {
-	host: 'heroku',
+
+	host: 'ec2-107-21-218-93.compute-1.amazonaws.com',
 	dialect: 'postgres',
 	define: {
 		timestamps: false

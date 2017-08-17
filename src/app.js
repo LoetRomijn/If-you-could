@@ -2,7 +2,7 @@
 
 Final Project for NYCDA x BSSA course jan-march 2016
 
-If you could 
+If you could
 
 to improve:
 
@@ -11,7 +11,7 @@ to improve:
 - password change id to something not that easy to 'hack'
 - clean up code by writing 'find random advice' query into a function
 - add season-choice to advice ?
- 
+
 /////////////////////////////////////////////////*/
 
 var express = require('express');
@@ -54,7 +54,7 @@ app.set('view engine', 'jade');
 
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('ifyoucould', process.env.POSTGRES_USER, null, {
-	host: 'localhost',
+	host: 'heroku',
 	dialect: 'postgres',
 	define: {
 		timestamps: false
@@ -83,7 +83,7 @@ var User = sequelize.define('users', {
 });
 
 
-//Routes 
+//Routes
 
 // Homepage
 
@@ -100,7 +100,7 @@ app.get('/why', function(request, response){
 	response.render('why');
 });
 
-// Login 
+// Login
 
 app.get('/login', function(request, response) {
 	response.render('login', {
@@ -109,7 +109,7 @@ app.get('/login', function(request, response) {
 	});
 })
 
-// Register 
+// Register
 
 app.get('/user/new', function(request, response) {
 	response.render('register', {
@@ -441,7 +441,7 @@ app.get('/user/profile', function(request, response) {
 	}
 });
 
-// Login  
+// Login
 
 app.post('/login', function(request, response) {
 	var password = request.body.password;
@@ -565,7 +565,7 @@ app.post('/user/new/advice', function(request, response) {
 });
 
 
-// Edit user      - after editing, changes are confirmed but not yet immediately showing on the profile page    
+// Edit user      - after editing, changes are confirmed but not yet immediately showing on the profile page
 
 app.get('/user/edit', function(request, response) {
 	var user = request.session.user;
@@ -760,7 +760,7 @@ app.post('/user/delete', function(request, response) {
 });
 
 
-// Sync database, then start server 
+// Sync database, then start server
 
 var port = Number(process.env.PORT || 3000); // proces.env.PORT check
 
@@ -769,4 +769,3 @@ sequelize.sync().then(function() {
 		console.log('Ifyoucould final project running on port 3000');
 	});
 });
-

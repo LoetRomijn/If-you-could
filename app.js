@@ -53,7 +53,7 @@ app.set('view engine', 'jade');
 // Sequelize settings
 
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('dd5nv7dioj6g8h', process.env.POSTGRES_USER, null, {
+var sequelize = new Sequelize('dd5nv7dioj6g8h', 'beahcugtguxnaz', null, {
 
 	host: 'ec2-107-21-218-93.compute-1.amazonaws.com',
 	dialect: 'postgres',

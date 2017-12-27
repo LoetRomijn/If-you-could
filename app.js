@@ -46,7 +46,7 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-app.set('views', './src/views');
+app.set('views', './views');
 app.set('view engine', 'jade');
 
 
